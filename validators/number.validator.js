@@ -34,7 +34,7 @@ export default function validator(data, validator) {
   }
 
   if (validator.minmax) {
-    const { value, message, rangeInclusive = false } = validator.minmax;
+    const { value, message, rangeInclusive = true } = validator.minmax;
     checkError(value, "minmax");
     if (!Array.isArray(value) || value.length !== 2) {
       throw new Error("VALIDATOR: 'minmax' property value must be an array with two numbers.");
