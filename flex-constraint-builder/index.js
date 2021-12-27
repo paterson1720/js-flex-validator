@@ -27,6 +27,23 @@ Flex.prototype.string = function (message) {
 };
 
 /**
+ * Sets the key 'allowEmptyString' to the specified values in the constraint object.
+ */
+Flex.prototype.allowEmpty = function (bool, message) {
+  const value = bool ?? true;
+  this.constraint.allowEmptyString = { value, message };
+  return this;
+};
+
+/**
+ * Sets the key 'allowedFalseyValues' to the specified values in the constraint object.
+ */
+Flex.prototype.allowedValues = function (values = []) {
+  this.constraint.allowedFalseyValues = values;
+  return this;
+};
+
+/**
  * Sets the key 'type' to the value 'number' in the constraint object.
  */
 Flex.prototype.number = function (message) {
@@ -47,8 +64,9 @@ Flex.prototype.email = function (message) {
 /**
  * Sets the key 'type' to the value 'array' in the constraint object.
  */
-Flex.prototype.array = function () {
+Flex.prototype.array = function (message) {
   this.constraint.type = "array";
+  this.constraint.typeMessage = message;
   return this;
 };
 
@@ -58,7 +76,7 @@ Flex.prototype.array = function () {
  * @param {string} [msg] - The message to be returned if the validation fail.
  * @param {Object} [options] - Object with single property 'rangeInclusive' to tell if the specified range is inclusive or not. Default to true.
  */
-Flex.prototype.minmax = function (value, msg, options = { rangeIncludes: true }) {
+Flex.prototype.minmax = function (value, msg, options = { rangeInclusive: true }) {
   const message = msg || `Should be between ${value.join(" - ")}`;
   this.constraint.minmax = { value, message, rangeInclusive: options.rangeInclusive };
   return this;
@@ -111,7 +129,7 @@ Flex.prototype.max = function (value, msg) {
 /**
  * Sets the key 'match' to the specified value in the constraint object.
  */
-Flex.prototype.match = function (regex, message) {
+Flex.prototype.match = function (regex, msg) {
   const message = msg || `Should match the regex ${regex}`;
   this.constraint.match = { regex, message };
   return this;

@@ -4,10 +4,10 @@ import { validateObject, validateValue } from "./index.js";
 const constraints = [
   Flex("name").string().required().minLength(3).maxLength(50).end(),
   Flex("age").number().required().min(18, "Age should be 18 years old or older.").max(65).end(),
-  Flex("email").email().required().maxLength(255).end(),
+  Flex("email").email().match(/abc/).required().maxLength(255).end(),
   Flex("address.street").string().required().end(),
   Flex("address.city").string().required().minLength(30).end(),
-  Flex("address.code").string().required().maxLength(6).end(),
+  Flex("address.code", "code").string().required().maxLength(6).end(),
 ];
 
 const testData1 = {

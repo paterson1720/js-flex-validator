@@ -76,3 +76,73 @@ const result1 = validateObject(testData1, constraints);
 }
 */
 ```
+
+## Syntax
+
+### Constructor
+
+- **Flex(path, [displayName])**
+
+When validating an object, the `path` is the path to the value to be validated in the object, it can be a root path or a deeply nested path (i.e.: `address.street`). The `displayName` is an optional name to be displayed in the error message, if not provided, the `path` is used.
+
+When validating a single value, the `path` is used as a name to display in error messages.
+
+- **required([boolean], [message])**
+
+The `required()` method specifies if a value is required or not. It accepts an optional `boolean` which is default to `true` and `message` argument that will be used if this constraint is violated, otherwise a default error message will be returned.
+
+- **string([message])**
+
+The `string()` method specifies that the value should be of type `string`. It accepts an optional `message` argument that will be used if this constraint is violated, otherwise a default error message will be returned.
+
+- **minLength(value, [message])**
+
+The `minLength()` method specifies the maximum length for a `string`. It accepts an optional `message` argument that will be used if this constraint is violated, otherwise a default error message will be returned.
+
+- **maxLength(value, [message])**
+
+The `maxLength()` method specifies the maximum length for a `string`. It accepts an optional `message` argument that will be used if this constraint is violated, otherwise a default error message will be returned.
+
+- **allowEmpty(boolean, [message])**
+
+The `allowEmpty()` method specifies if a string value is allowed to be empty or not, by default, a string is allowed to be empty. Use this method if you want to overwrite this behavior. It accepts a `boolean` argument and an optional `message` argument that will be used if this constraint is violated, otherwise a default error message will be returned.
+
+- **allowedValues(any[])**
+
+The `allowedValues()` method specifies an array of allowed values, these values will pass validation even if they don't match the specified type. (i.e.: you can allow a string value to be `null` like this: `Flex('name').string().allowedValues([null]).end()`).
+
+- **email([message])**
+
+The `email()` method specifies that the value should be of type `email`. It accepts an optional `message` argument that will be used if this constraint is violated, otherwise a default error message will be returned.
+
+- **match(regex, [message])**
+
+The `match()` method specifies a regular expression that a `string` or an `email` should match. It accepts an optional `message` argument that will be used if this constraint is violated, otherwise a default error message will be returned.
+
+- **array([message])**
+
+The `array()` method specifies that the value should be of type `array`. It accepts an optional `message` argument that will be used if this constraint is violated, otherwise a default error message will be returned.
+
+- **array([message])**
+
+The `array()` method specifies that the value should be of type `array`. It accepts an optional `message` argument that will be used if this constraint is violated, otherwise a default error message will be returned.
+
+- **number([message])**
+
+The `number()` method specifies that the value should be of type `number`. It accepts an optional `message` argument that will be used if this constraint is violated, otherwise a default error message will be returned.
+
+- **min(value, [message])**
+
+The `min()` method specifies the minimum allowed value for a `number`. It accepts an optional `message` argument that will be used if this constraint is violated, otherwise a default error message will be returned.
+
+- **max(value, [message])**
+
+The `max()` method specifies the maximum allowed value for a `number`. It accepts an optional `message` argument that will be used if this constraint is violated, otherwise a default error message will be returned.
+
+- **minmax(value, [message], [options{rangeInclusive: boolean}])**
+
+The `minmax()` method specifies the range that is allowed for a `number`. It accepts an optional `message` argument that will be used if this constraint is violated, otherwise a default error message will be returned. It also accepts an options object, to specify if the range is inclusive or not, which is default to true.
+
+- **customValidator(validator: (value, constraints, object)=> string|null)**
+
+The `customValidator()` method gives you the possibillity to provide a custom validator function for more complex validations. It accepts the `value`, `constraints` and the whole `object` data if validating an object. This function should return a `string` or `null`.
