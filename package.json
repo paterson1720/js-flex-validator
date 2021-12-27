@@ -1,0 +1,20 @@
+{
+  "name": "js-flex-validator",
+  "version": "1.0.0",
+  "description": "flexible JavaScript library for validation ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "JavaScript",
+    "validation",
+    "form",
+    "validation",
+    "validator",
+    "object",
+    "validation"
+  ],
+  "author": "Paterson Anaccius",
+  "license": "MIT"
+}
