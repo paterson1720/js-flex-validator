@@ -26,5 +26,6 @@ const result2 = validateValue(
   "New York New York New York New York",
   Flex("address.city").path("address.city").string().required().minLength(30).end()
 );
+
 console.log("test1", result1);
 console.log("test2", result2);
