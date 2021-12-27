@@ -1,11 +1,11 @@
-const Flex = require("./flex-constraint-builder");
-const basicValidation = require("./validators/basic.validator");
-const validateDataByType = require("./validators/types.validator");
-const { helpers } = require("./utils");
+import Flex from "./flex-constraint-builder/index.js";
+import basicValidation from "./validators/basic.validator.js";
+import validateDataByType from "./validators/types.validator.js";
+import { helpers } from "./utils/index.js";
 
 const { get, isFunc, isNullOrUndefined, checkCustomvalidator } = helpers;
 
-const validateValue = (data, validator, object) => {
+export const validateValue = (data, validator, object) => {
   const { type, required, customValidator } = validator;
   const isRequired = isFunc(required) ? required(data, validator) : required;
   const basicValidationError = basicValidation(data, validator);
@@ -18,7 +18,7 @@ const validateValue = (data, validator, object) => {
   return validateDataByType(type)(data, validator);
 };
 
-const validateObject = (object, validators) => {
+export const validateObject = (object, validators) => {
   const validation = { hasError: false, errorDetails: {} };
 
   validators.forEach((validator) => {
@@ -34,6 +34,4 @@ const validateObject = (object, validators) => {
   return validation;
 };
 
-module.exports = Flex;
-module.exports.validateValue = validateValue;
-module.exports.validateObject = validateObject;
+export default Flex;

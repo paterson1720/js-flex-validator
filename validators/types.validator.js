@@ -1,7 +1,7 @@
-const stringValidator = require("./string.validator");
-const numberValidator = require("./number.validator");
-const emailValidator = require("./email.validator");
-const arrayValidator = require("./array.validator");
+import stringValidator from "./string.validator.js";
+import numberValidator from "./number.validator.js";
+import emailValidator from "./email.validator.js";
+import arrayValidator from "./array.validator.js";
 
 const TYPES = {
   string: stringValidator,
@@ -10,4 +10,4 @@ const TYPES = {
   array: arrayValidator,
 };
 
-module.exports = (type) => TYPES[type];
+export default (type) => TYPES[type];

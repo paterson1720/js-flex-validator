@@ -1,8 +1,8 @@
-const { helpers } = require("../utils");
+import { helpers } from "../utils/index.js";
 
 const { isString, isFunc, checkError } = helpers;
 
-module.exports = (data, validator) => {
+export default function validator(data, validator) {
   const { allowEmptyString = { value: true } } = validator;
   const { allowedFalseyValues = [] } = validator;
 
@@ -39,4 +39,4 @@ module.exports = (data, validator) => {
   }
 
   return null;
-};
+}

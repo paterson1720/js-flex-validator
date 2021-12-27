@@ -27,16 +27,14 @@ const get = (obj, path, defaultValue) => {
   return get(obj[key], newPath, defaultValue);
 };
 
-module.exports = {
-  constants: { EMAIL_RGX },
-  helpers: {
-    get,
-    isNumber,
-    isFunc,
-    isString,
-    match,
-    checkError,
-    isNullOrUndefined,
-    checkCustomvalidator,
-  },
+export const constants = { EMAIL_RGX };
+export const helpers = {
+  get,
+  isNumber,
+  isFunc,
+  isString,
+  match,
+  checkError,
+  isNullOrUndefined,
+  checkCustomvalidator,
 };

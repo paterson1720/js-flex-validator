@@ -20,24 +20,27 @@ Flex.prototype.path = function (path) {
 /**
  * Sets the key 'type' to the value 'string' in the constraint object.
  */
-Flex.prototype.string = function () {
+Flex.prototype.string = function (message) {
   this.constraint.type = "string";
+  this.constraint.typeMessage = message;
   return this;
 };
 
 /**
  * Sets the key 'type' to the value 'number' in the constraint object.
  */
-Flex.prototype.number = function () {
+Flex.prototype.number = function (message) {
   this.constraint.type = "number";
+  this.constraint.typeMessage = message;
   return this;
 };
 
 /**
  * Sets the key 'type' to the value 'email' in the constraint object.
  */
-Flex.prototype.email = function () {
+Flex.prototype.email = function (message) {
   this.constraint.type = "email";
+  this.constraint.typeMessage = message;
   return this;
 };
 
@@ -106,6 +109,15 @@ Flex.prototype.max = function (value, msg) {
 };
 
 /**
+ * Sets the key 'match' to the specified value in the constraint object.
+ */
+Flex.prototype.match = function (regex, message) {
+  const message = msg || `Should match the regex ${regex}`;
+  this.constraint.match = { regex, message };
+  return this;
+};
+
+/**
  * Sets the 'customValidator' constraint key to the specified 'validator' function.
  * @param {Function} validator - A function that receives the 'data', 'constraints' and 'object'
  * as arguments and returns an error message or null.
@@ -132,7 +144,9 @@ Flex.prototype.message = function (msg) {
  * Sets the 'required' constraint key to the specified 'boolean' or 'function'.
  * @param {Boolean|Function} msg - A boolean or function that receives the 'data' and 'constraint' object as arguments and returns a boolean.
  */
-Flex.prototype.required = function (arg) {
+Flex.prototype.required = function (arg, message) {
+  this.constraint.message = message;
+
   if (arg === undefined) {
     this.constraint.required = true;
     return this;
@@ -154,4 +168,4 @@ Flex.prototype.end = function () {
   return this.constraint;
 };
 
-module.exports = Flex;
+export default Flex;

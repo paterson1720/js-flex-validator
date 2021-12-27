@@ -1,10 +1,10 @@
-const validateEmailString = require("./string.validator");
-const { helpers, constants } = require("../utils");
+import validateEmailString from "./string.validator.js";
+import { helpers, constants } from "../utils/index.js";
 
 const { match } = helpers;
 const { EMAIL_RGX } = constants;
 
-module.exports = (email, validator) => {
+export default function validator(email, validator) {
   const stringErrorMessage = validateEmailString(email, validator);
   const defaultMessage = "not a valid email.";
 
@@ -12,4 +12,4 @@ module.exports = (email, validator) => {
   if (!match(email, EMAIL_RGX)) return validator.message || defaultMessage;
 
   return null;
-};
+}

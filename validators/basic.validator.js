@@ -1,9 +1,9 @@
 /* eslint-disable valid-typeof */
-const { helpers } = require("../utils");
+import { helpers } from "../utils/index.js";
 
 const { isFunc, isNullOrUndefined } = helpers;
 
-module.exports = (data, validator) => {
+export default function validator(data, validator) {
   const { fieldName, type, message, typeMessage } = validator;
   const { allowedFalseyValues = [], required = false } = validator;
   const isRequired = isFunc(required) ? required(data, validator) : required;
@@ -24,4 +24,4 @@ module.exports = (data, validator) => {
   }
 
   return null;
-};
+}

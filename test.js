@@ -1,5 +1,5 @@
-const Flex = require("./flex-constraint-builder");
-const { validateObject, validateValue } = require(".");
+import Flex from "./flex-constraint-builder/index.js";
+import { validateObject, validateValue } from "./index.js";
 
 const constraints = [
   Flex("name").string().required().minLength(3).maxLength(50).end(),

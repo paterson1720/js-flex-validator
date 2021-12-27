@@ -1,8 +1,8 @@
-const { helpers } = require("../utils");
+import { helpers } from "../utils/index.js";
 
 const { isNumber, isFunc, checkError } = helpers;
 
-module.exports = (data, validator) => {
+export default function validator(data, validator) {
   const { allowedFalseyValues = [] } = validator;
 
   if (!isNumber(data) && allowedFalseyValues.includes(data)) {
@@ -49,4 +49,4 @@ module.exports = (data, validator) => {
   }
 
   return null;
-};
+}
