@@ -3,10 +3,14 @@ import { helpers } from "../utils/index.js";
 const { isString, isFunc, checkError } = helpers;
 
 export default function validator(data, validator) {
-  const { allowEmptyString = { value: true } } = validator;
+  const { allowEmptyString = { value: false } } = validator;
   const { allowedFalseyValues = [] } = validator;
 
   if (!isString(data) && allowedFalseyValues.includes(data)) {
+    return null;
+  }
+
+  if (allowEmptyString.value && !data.trim().length) {
     return null;
   }
 

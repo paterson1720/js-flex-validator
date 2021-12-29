@@ -76,6 +76,93 @@ const result1 = validateObject(testData1, constraints);
 */
 ```
 
+## React Form Validation Example
+
+- See it live on CodeSandbox
+
+```js
+import React from "react";
+import Flex, { validateObject, validateValue } from "js-flex-validator";
+
+const constraints = {
+  username: Flex("username")
+    .string()
+    .allowEmpty()
+    .min(3, "Username should be at least 3 characters")
+    .max(50, "Username should not exceeds 50 characters"),
+  email: Flex("email")
+    .email("This email is not valid.")
+    .match(/\w.@edu.com$/, "Should be a edu.com domain")
+    .required()
+    .min(5, "Email should be at least 3 characters")
+    .max(255, "Username should not exceeds 255 characters"),
+  password: Flex("password")
+    .string()
+    .required()
+    .min(5, "Password should be at least 5 characters")
+    .max(20, "Password should not exceeds 50 characters"),
+};
+
+const initialState = { username: "", password: "", email: "" };
+
+export default function App() {
+  const [state, setState] = React.useState(initialState);
+  const [errors, setErrors] = React.useState(null);
+
+  const validate = () => {
+    const constraintsArr = Object.values(constraints);
+    const { hasError } = validateObject(state, constraintsArr);
+    return hasError;
+  };
+
+  const validateField = (name, value) => {
+    const fieldConstraint = constraints[name];
+    const message = validateValue(value, fieldConstraint);
+    console.log(value, message);
+    return message;
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setErrors(validate());
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setState({ ...state, [name]: value.trim() });
+    setErrors({ ...errors, [name]: validateField(name, value.trim()) });
+  };
+
+  return (
+    <form className="App" onSubmit={handleSubmit}>
+      <h2>React Form Validation</h2>
+      <h4>With JS-flex-validator</h4>
+
+      <div>
+        <input name="username" type="text" placeholder="Username" value={state.username} onChange={handleChange} />
+        {errors && <small>{errors.username}</small>}
+      </div>
+
+      <div>
+        <input name="email" type="text" placeholder="Email" value={state.email} onChange={handleChange} />
+        {errors && <small>{errors.email}</small>}
+      </div>
+
+      <div>
+        <input name="password" type="password" placeholder="Password" value={state.password} onChange={handleChange} />
+        {errors && <small>{errors.password}</small>}
+      </div>
+
+      <div>
+        <button disabled={validate()} type="submit">
+          submit
+        </button>
+      </div>
+    </form>
+  );
+}
+```
+
 ## Syntax
 
 ### Constructor
