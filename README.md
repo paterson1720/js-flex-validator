@@ -100,7 +100,7 @@ const constraints = {
     .string()
     .required()
     .min(5, "Password should be at least 5 characters")
-    .max(20, "Password should not exceeds 50 characters"),
+    .max(20, "Password should not exceeds 20 characters"),
 };
 
 const initialState = { username: "", password: "", email: "" };
