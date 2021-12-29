@@ -16,7 +16,7 @@ based on the value of the dependencies.
 import Flex, { validateValue } from "js-flex-validator";
 
 const age = 17;
-const constraint = Flex("age").number().required().min(18).max(65).end();
+const constraint = Flex("age").number().required().min(18).max(65);
 
 const error = validateValue(age, constraint);
 console.log(error); // "Minimum is 18"
@@ -78,7 +78,7 @@ const result1 = validateObject(testData1, constraints);
 
 ## React Form Validation Example
 
-- See it live on CodeSandbox
+- [Click here to see it live on CodeSandbox](https://codesandbox.io/s/react-form-validation-with-flex-validator-0ikdp?file=/src/App.js:0-2634)
 
 ```js
 import React from "react";

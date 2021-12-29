@@ -1,7 +1,7 @@
 {
   "name": "js-flex-validator",
   "version": "1.0.3",
-  "description": "flexible JavaScript library for validation ",
+  "description": "flexible JavaScript library for data and React Form validation.",
   "main": "index.js",
   "type": "module",
   "scripts": {
@@ -9,12 +9,13 @@
   },
   "keywords": [
     "JavaScript",
+    "data",
     "validation",
+    "React",
     "form",
     "validation",
-    "validator",
     "object",
-    "validation"
+    "validator"
   ],
   "author": "Paterson Anaccius",
   "license": "MIT"
