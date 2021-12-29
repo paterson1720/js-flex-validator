@@ -6,22 +6,24 @@ import { helpers } from "./utils/index.js";
 const { get, isFunc, isNullOrUndefined, checkCustomvalidator } = helpers;
 
 export const validateValue = (data, validator, object) => {
-  const { type, required, customValidator } = validator;
-  const isRequired = isFunc(required) ? required(data, validator) : required;
-  const basicValidationError = basicValidation(data, validator);
+  const constraint = validator instanceof Flex ? validator.end() : validator;
+  const { type, required, customValidator } = constraint;
+  const isRequired = isFunc(required) ? required(data, constraint) : required;
+  const basicValidationError = basicValidation(data, constraint);
 
   if (customValidator) checkCustomvalidator(customValidator);
-  if (isNullOrUndefined(data) && !isRequired) return customValidator?.(data, validator, object) || null;
+  if (isNullOrUndefined(data) && !isRequired) return customValidator?.(data, constraint, object) || null;
   if (basicValidationError) return basicValidationError;
-  if (customValidator) return customValidator(data, validator, object);
+  if (customValidator) return customValidator(data, constraint, object);
 
-  return validateDataByType(type)(data, validator);
+  return validateDataByType(type)(data, constraint);
 };
 
 export const validateObject = (object, validators) => {
   const validation = { hasError: false, errorDetails: {} };
+  const validatorsObj = validators.map((v) => (v instanceof Flex ? v.end() : v));
 
-  validators.forEach((validator) => {
+  validatorsObj.forEach((validator) => {
     const { fieldName, path } = validator;
     const data = get(object, path);
     const message = validateValue(data, validator, object);

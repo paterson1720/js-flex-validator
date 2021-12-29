@@ -11,3 +11,4 @@ const TYPES = {
 };
 
 export default (type) => TYPES[type];
+

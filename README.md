@@ -32,8 +32,7 @@ const constraint = Flex("age")
   .number("Age should be of type number.")
   .required(true, "You should provide a value for age.")
   .min(18, "Age should be 18 years old or older.")
-  .max(65, "Age should not be older than 65 years old.")
-  .end();
+  .max(65, "Age should not be older than 65 years old.");
 
 const error = validateValue(age, constraint);
 console.log(error); // "Age should be 18 years old or older."
@@ -45,12 +44,12 @@ console.log(error); // "Age should be 18 years old or older."
 import Flex, { validateObject } from "js-flex-validator";
 
 const constraints = [
-  Flex("name").string().required().minLength(3).maxLength(50).end(),
-  Flex("age").number().required().min(18, "Age should be 18 years old or older.").max(65).end(),
-  Flex("email").email().required().maxLength(255).end(),
-  Flex("address.street").string().required().end(),
-  Flex("address.city").string().required().minLength(30).end(),
-  Flex("address.code").string().required().maxLength(6).end(),
+  Flex("name").string().required().min(3).max(50),
+  Flex("age").number().required().min(18, "Age should be 18 years old or older.").max(65),
+  Flex("email").email().required().max(255),
+  Flex("address.street").string().required(),
+  Flex("address.city").string().required().min(30),
+  Flex("address.code").string().required().max(6),
 ];
 
 const testData1 = {

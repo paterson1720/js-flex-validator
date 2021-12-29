@@ -22,16 +22,16 @@ export default function validator(data, validator) {
     }
   }
 
-  if (validator.maxLength) {
-    const { value, message } = validator.maxLength;
+  if (validator.maxLength || validator.max) {
+    const { value, message } = validator.maxLength || validator.max;
     checkError(value, "maxLength");
     if (data.length > value) {
       return isFunc(message) ? message(data, validator) : message;
     }
   }
 
-  if (validator.minLength) {
-    const { value, message } = validator.minLength;
+  if (validator.minLength || validator.min) {
+    const { value, message } = validator.minLength || validator.min;
     checkError(value, "minLength");
     if (data.length < value) {
       return isFunc(message) ? message(data, validator) : message;
