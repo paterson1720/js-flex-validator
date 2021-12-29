@@ -57,7 +57,6 @@ Flex.prototype.number = function (message) {
  */
 Flex.prototype.email = function (message) {
   this.constraint.type = "email";
-  this.constraint.message = message;
   this.constraint.typeMessage = message;
   return this;
 };

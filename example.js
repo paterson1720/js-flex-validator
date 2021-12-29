@@ -4,7 +4,7 @@ import { validateObject, validateValue } from "./index.js";
 const constraints = [
   Flex("name").string().required().minLength(3).maxLength(50),
   Flex("age").number().required().min(18, "Age should be 18 years old or older.").max(65),
-  Flex("email").email().match(/abc/).required().maxLength(255),
+  Flex("email").email("Fuck this").match(/abc/).required().maxLength(255),
   Flex("address.street").string().required(),
   Flex("address.city").string().required().minLength(30),
   Flex("address.code", "code").string().required().max(6),
@@ -22,10 +22,7 @@ const testData1 = {
 };
 
 const result1 = validateObject(testData1, constraints);
-const result2 = validateValue(
-  "New York New York New York New York",
-  Flex("address.city").path("address.city").string().required().minLength(30)
-);
+const result2 = validateValue("email", Flex("email").email("Fuck This").required());
 
 console.log("test1", result1);
 console.log("test2", result2);
