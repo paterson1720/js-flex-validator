@@ -1,6 +1,6 @@
 {
   "name": "js-flex-validator",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "flexible JavaScript library for data and React Form validation.",
   "main": "index.js",
   "type": "module",

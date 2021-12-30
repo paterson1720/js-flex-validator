@@ -90,12 +90,14 @@ const constraints = {
     .allowEmpty()
     .min(3, "Username should be at least 3 characters")
     .max(50, "Username should not exceeds 50 characters"),
+
   email: Flex("email")
     .email("This email is not valid.")
     .match(/\w.@edu.com$/, "Should be a edu.com domain")
     .required()
     .min(5, "Email should be at least 3 characters")
     .max(255, "Username should not exceeds 255 characters"),
+
   password: Flex("password")
     .string()
     .required()
@@ -118,13 +120,14 @@ export default function App() {
   const validateField = (name, value) => {
     const fieldConstraint = constraints[name];
     const message = validateValue(value, fieldConstraint);
-    console.log(value, message);
     return message;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setErrors(validate());
+    const error = validate();
+    if (error) return;
+    console.log(state);
   };
 
   const handleChange = (e) => {
