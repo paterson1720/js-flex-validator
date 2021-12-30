@@ -22,7 +22,7 @@ const testData1 = {
 };
 
 const result1 = validateObject(testData1, constraints);
-const result2 = validateValue("email", Flex("email").email("Fuck This").required());
+const result2 = Flex.validateValue("email", Flex("email").email("Fuck This").required());
 
 console.log("test1", result1);
 console.log("test2", result2);

@@ -36,4 +36,7 @@ export const validateObject = (object, validators) => {
   return validation;
 };
 
+Flex.validateObject = validateObject;
+Flex.validateValue = validateValue;
+
 export default Flex;
