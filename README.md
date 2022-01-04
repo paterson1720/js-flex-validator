@@ -13,10 +13,10 @@ based on the value of the dependencies.
 - With default error messages
 
 ```js
-import Flex, { validateValue } from "js-flex-validator";
+import Flex, { validateValue } from 'js-flex-validator';
 
 const age = 17;
-const constraint = Flex("age").number().required().min(18).max(65);
+const constraint = Flex('age').number().required().min(18).max(65);
 
 const error = validateValue(age, constraint);
 console.log(error); // "Minimum is 18"
@@ -25,14 +25,14 @@ console.log(error); // "Minimum is 18"
 - With custom error messages
 
 ```js
-import Flex, { validateValue } from "js-flex-validator";
+import Flex, { validateValue } from 'js-flex-validator';
 
 const age = 17;
-const constraint = Flex("age")
-  .number("Age should be of type number.")
-  .required(true, "You should provide a value for age.")
-  .min(18, "Age should be 18 years old or older.")
-  .max(65, "Age should not be older than 65 years old.");
+const constraint = Flex('age')
+  .number('Age should be of type number.')
+  .required(true, 'You should provide a value for age.')
+  .min(18, 'Age should be 18 years old or older.')
+  .max(65, 'Age should not be older than 65 years old.');
 
 const error = validateValue(age, constraint);
 console.log(error); // "Age should be 18 years old or older."
@@ -41,25 +41,26 @@ console.log(error); // "Age should be 18 years old or older."
 ## Object validation Quick Example
 
 ```js
-import Flex, { validateObject } from "js-flex-validator";
+import Flex, { validateObject } from 'js-flex-validator';
 
 const constraints = [
-  Flex("name").string().required().min(3).max(50),
-  Flex("age").number().required().min(18, "Age should be 18 years old or older.").max(65),
-  Flex("email").email().required().max(255),
-  Flex("address.street").string().required(),
-  Flex("address.city").string().required().min(30),
-  Flex("address.code").string().required().max(6),
+  Flex('name').string().required().min(3).max(50),
+  Flex('age').number().required().min(18, 'Age should be 18 years old or older.').max(65),
+  Flex('email').email().required().max(255),
+  Flex('isMajor').boolean().required(),
+  Flex('address.street').string().required(),
+  Flex('address.city').string().required().min(30),
+  Flex('address.code').string().required().max(6),
 ];
 
 const testData1 = {
-  name: "Paterson A.",
+  name: 'Paterson A.',
   age: 17,
-  email: "paterson@email.com",
+  email: 'paterson@email.com',
   address: {
     street: "O'Higgins Central 0902",
-    city: "Santiago",
-    code: "0054321",
+    city: 'Santiago',
+    code: '0054321',
   },
 };
 
@@ -70,7 +71,8 @@ const result1 = validateObject(testData1, constraints);
   hasError: true,
   errorDetails: { 
     age: 'Age should be 18 years old or older.', 
-    'address.code': 'Maximum length is 6' 
+    'address.code': 'Maximum length is 6',
+    isMajor: '"isMajor" is required.',
   }
 }
 */
@@ -81,31 +83,31 @@ const result1 = validateObject(testData1, constraints);
 - [Click here to see it live on CodeSandbox](https://codesandbox.io/s/react-form-validation-with-flex-validator-0ikdp?file=/src/App.js:0-2634)
 
 ```js
-import React from "react";
-import Flex, { validateObject, validateValue } from "js-flex-validator";
+import React from 'react';
+import Flex, { validateObject, validateValue } from 'js-flex-validator';
 
 const constraints = {
-  username: Flex("username")
+  username: Flex('username')
     .string()
     .allowEmpty()
-    .min(3, "Username should be at least 3 characters")
-    .max(50, "Username should not exceeds 50 characters"),
+    .min(3, 'Username should be at least 3 characters')
+    .max(50, 'Username should not exceeds 50 characters'),
 
-  email: Flex("email")
-    .email("This email is not valid.")
-    .match(/\w.@edu.com$/, "Should be a edu.com domain")
+  email: Flex('email')
+    .email('This email is not valid.')
+    .match(/\w.@edu.com$/, 'Should be a edu.com domain')
     .required()
-    .min(5, "Email should be at least 3 characters")
-    .max(255, "Username should not exceeds 255 characters"),
+    .min(5, 'Email should be at least 3 characters')
+    .max(255, 'Username should not exceeds 255 characters'),
 
-  password: Flex("password")
+  password: Flex('password')
     .string()
     .required()
-    .min(5, "Password should be at least 5 characters")
-    .max(20, "Password should not exceeds 20 characters"),
+    .min(5, 'Password should be at least 5 characters')
+    .max(20, 'Password should not exceeds 20 characters'),
 };
 
-const initialState = { username: "", password: "", email: "" };
+const initialState = { username: '', password: '', email: '' };
 
 export default function App() {
   const [state, setState] = React.useState(initialState);
@@ -183,6 +185,10 @@ The `required()` method specifies if a value is required or not. It accepts an o
 - **string([message])**
 
 The `string()` method specifies that the value should be of type `string`. It accepts an optional `message` argument that will be used if this constraint is violated, otherwise a default error message will be returned.
+
+- **boolean([message])**
+
+The `boolean()` method specifies that the value should be of type `boolean`. It accepts an optional `message` argument that will be used if this constraint is violated, otherwise a default error message will be returned.
 
 - **minLength(value, [message])**
 

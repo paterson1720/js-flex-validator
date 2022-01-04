@@ -21,7 +21,7 @@ Flex.prototype.path = function (path) {
  * Sets the key 'type' to the value 'string' in the constraint object.
  */
 Flex.prototype.string = function (message) {
-  this.constraint.type = "string";
+  this.constraint.type = 'string';
   this.constraint.typeMessage = message;
   return this;
 };
@@ -47,7 +47,16 @@ Flex.prototype.allowedValues = function (values = []) {
  * Sets the key 'type' to the value 'number' in the constraint object.
  */
 Flex.prototype.number = function (message) {
-  this.constraint.type = "number";
+  this.constraint.type = 'number';
+  this.constraint.typeMessage = message;
+  return this;
+};
+
+/**
+ * Sets the key 'type' to the value 'boolean' in the constraint object.
+ */
+Flex.prototype.boolean = function (message) {
+  this.constraint.type = 'boolean';
   this.constraint.typeMessage = message;
   return this;
 };
@@ -56,7 +65,7 @@ Flex.prototype.number = function (message) {
  * Sets the key 'type' to the value 'email' in the constraint object.
  */
 Flex.prototype.email = function (message) {
-  this.constraint.type = "email";
+  this.constraint.type = 'email';
   this.constraint.typeMessage = message;
   return this;
 };
@@ -65,7 +74,7 @@ Flex.prototype.email = function (message) {
  * Sets the key 'type' to the value 'array' in the constraint object.
  */
 Flex.prototype.array = function (message) {
-  this.constraint.type = "array";
+  this.constraint.type = 'array';
   this.constraint.typeMessage = message;
   return this;
 };
@@ -77,7 +86,7 @@ Flex.prototype.array = function (message) {
  * @param {Object} [options] - Object with single property 'rangeInclusive' to tell if the specified range is inclusive or not. Default to true.
  */
 Flex.prototype.minmax = function (value, msg, options = { rangeInclusive: true }) {
-  const message = msg || `Should be between ${value.join(" - ")}`;
+  const message = msg || `Should be between ${value.join(' - ')}`;
   this.constraint.minmax = { value, message, rangeInclusive: options.rangeInclusive };
   return this;
 };
@@ -150,7 +159,7 @@ Flex.prototype.customValidator = function (validator) {
  * @param {String|Function} msg - A string or function that receives the 'data' and 'constraint' object as arguments and returns a string
  */
 Flex.prototype.message = function (msg) {
-  if (["string", "function"].includes(typeof msg)) {
+  if (['string', 'function'].includes(typeof msg)) {
     this.constraint.message = msg;
   } else {
     throw new Error("Argument to 'message' must be a 'string' or a 'function'!");
@@ -170,7 +179,7 @@ Flex.prototype.required = function (arg, message) {
     return this;
   }
 
-  if (["boolean", "function"].includes(typeof arg)) {
+  if (['boolean', 'function'].includes(typeof arg)) {
     this.constraint.required = arg;
   } else {
     throw new Error("Argument to 'required' must be a 'boolean' or a 'function'!");

@@ -5,6 +5,7 @@ const constraints = [
   Flex("name").string().required().minLength(3).maxLength(50),
   Flex("age").number().required().min(18, "Age should be 18 years old or older.").max(65),
   Flex("email").email("Fuck this").match(/abc/).required().maxLength(255),
+  Flex("isMajor").boolean().required(),
   Flex("address.street").string().required(),
   Flex("address.city").string().required().minLength(30),
   Flex("address.code", "code").string().required().max(6),
@@ -14,6 +15,7 @@ const testData1 = {
   name: "Jhon Doe",
   age: 17,
   email: "jhondoe@email.com",
+  isMajor: false,
   address: {
     street: "690 Mill Pond Avenue",
     city: "New York New York New York New York",
