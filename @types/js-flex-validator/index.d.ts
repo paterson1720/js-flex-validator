@@ -1,3 +1,4 @@
+// TODO - add types for proper use in typescript project
 interface JSFlexValidator {
   string: (message?: string) => JSFlexValidator;
   number: (message?: string) => JSFlexValidator;
